@@ -2,14 +2,137 @@
 <html>
 <head>
     <title>Payment to Ashish Vishwakarma</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.classless.min.css" />
+    <style>
+        div {
+            align-content: center;
+        }
+
+        .dp {
+            border-radius: 50%;
+        }
+
+        .label {
+            padding: 10px;
+            font-size: 18px;
+            color: #111;
+        }
+
+        .copy-text {
+            position: relative;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: flex;
+        }
+
+            .copy-text input.text {
+                padding: 10px;
+                font-size: 18px;
+                color: #555;
+                border: none;
+                outline: none;
+            }
+
+            .copy-text button {
+                padding: 10px;
+                background: #5784f5;
+                color: #fff;
+                font-size: 18px;
+                border: none;
+                outline: none;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+
+                .copy-text button:active {
+                    background: #809ce2;
+                }
+
+                .copy-text button:before {
+                    content: "Copied";
+                    position: absolute;
+                    top: -45px;
+                    right: 0px;
+                    background: #5c81dc;
+                    padding: 8px 10px;
+                    border-radius: 20px;
+                    font-size: 15px;
+                    display: none;
+                }
+
+                .copy-text button:after {
+                    content: "";
+                    position: absolute;
+                    top: -20px;
+                    right: 25px;
+                    width: 10px;
+                    height: 10px;
+                    background: #5c81dc;
+                    transform: rotate(45deg);
+                    display: none;
+                }
+
+            .copy-text.active button:before,
+            .copy-text.active button:after {
+                display: block;
+            }
+    </style>
 </head>
 <body>
-    <hr />
-    <a href="upi://pay?pa=dgtl.menu.dex@pingpay&cu=INR">Pay using any UPI</a>
-    <hr />
-    <a href="tez://upi/pay?pa=dgtl.menu.dex@pingpay&cu=INR">Pay using Google Pay</a>
-    <hr />
-    <a href="phonepe://pay?pa=dgtl.menu.dex@pingpay&cu=INR">Pay using PhonePe</a>
-    <hr />
+    <div>
+        <hr />
+        <br />
+        <h1>Pay to Ashish Vishwakarma</h1>
+        <hr />
+        <img class="dp" src="Ashish Vishwakarma.jpg" style="height:150px;align-content:center" alt="Ashish Vishwakarma" />
+        <hr />
+        Pay using Google Pay
+        <br />
+        <a href="tez://upi/pay?pa=dgtl.menu.dex@pingpay&cu=INR">
+            <img src="google-pay.ico" />
+        </a>
+        <hr />
+        Pay using PhonePe
+        <br />
+        <a href="phonepe://pay?pa=dgtl.menu.dex@pingpay&cu=INR">
+            <img src="phonepe.ico" />
+        </a>
+        <hr />
+        Pay using any UPI
+        <br />
+        <a href="upi://pay?pa=dgtl.menu.dex@pingpay&cu=INR">
+            <br />
+            <img src="favicon.ico" />
+        </a>
+        <hr />
+        <div class="container">
+            <div class="label">
+                UPI ID
+            </div>
+            <div class="copy-text">
+                <input type="text" class="text" value="dgtl.menu.dex@pingpay" />
+                <button>📎</button>
+            </div>
+        </div>
+        <br />
+        <img src="UPI QR.jpg" style="max-width:100%">
+    </div>
+    <script>
+        let copyText = document.querySelector(".copy-text");
+        copyText.querySelector("button").addEventListener("click", function () {
+            let input = copyText.querySelector("input.text");
+            input.select();
+            document.execCommand("copy");
+            copyText.classList.add("active");
+            window.getSelection().removeAllRanges();
+            setTimeout(function () {
+                copyText.classList.remove("active");
+            }, 2500);
+        });
+
+    </script>
 </body>
 </html>
