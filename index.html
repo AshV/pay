@@ -74,7 +74,7 @@
             display: block;
             width: 100%;
             padding: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem; /* Reduced margin to make space for new buttons */
             border: none;
             border-radius: 8px;
             background: var(--gradient-main);
@@ -96,6 +96,64 @@
             transform: translateY(0);
         }
 
+        /* UPI App Buttons */
+        .upi-app-buttons {
+            display: flex;
+            justify-content: space-between; /* Distributes items with space between them */
+            gap: 10px; /* Space between buttons */
+            margin-bottom: 2rem;
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+            justify-content: center; /* Center items if they wrap */
+        }
+
+        .upi-app-button {
+            flex: 1; /* Allows buttons to grow and shrink */
+            min-width: 100px; /* Minimum width for each button */
+            max-width: 130px; /* Max width to prevent them from becoming too large */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.75rem 0.5rem;
+            border-radius: 12px; /* Slightly more rounded than card for distinct look */
+            border: 1px solid #E5E7EB;
+            background-color: #F9FAFB;
+            color: var(--color-text-dark);
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .upi-app-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: var(--color-primary-start);
+        }
+
+        .upi-app-button .logo {
+            width: 40px; /* Size of the circular logo */
+            height: 40px;
+            border-radius: 50%; /* Make it circular */
+            background-color: #E5E7EB; /* Placeholder background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--color-primary-start);
+            margin-bottom: 0.5rem;
+            /* Placeholder for actual logo images */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Specific logo styles (using background-image for actual logos) */
+        .upi-app-button.gpay .logo { background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Google_Pay_logo.svg/1200px-Google_Pay_logo.svg.png'); background-color: white; }
+        .upi-app-button.paytm .logo { background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo.png/800px-Paytm_Logo.png'); background-color: #00b9f1; background-size: 80%;}
+        .upi-app-button.phonepe .logo { background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/PhonePe_Logo.png/800px-PhonePe_Logo.png'); background-color: #5F259F; }
+
+
         /* Details Section */
         .details-section {
             text-align: left;
@@ -109,6 +167,11 @@
             color: var(--color-text-dark);
             border-bottom: 2px solid #E5E7EB;
             padding-bottom: 0.5rem;
+        }
+        
+        /* Specific header for "Bank Account Details" - to place it lower */
+        .bank-details-header {
+             margin-top: 2.5rem; /* Ensure good spacing */
         }
 
         .detail-item {
@@ -138,6 +201,27 @@
             font-size: 0.8rem;
             color: #9CA3AF;
         }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .payment-container {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .payment-button {
+                font-size: 1.1rem;
+                padding: 0.9rem;
+            }
+            .upi-app-button {
+                flex-basis: 48%; /* Two buttons per row on smaller screens */
+                max-width: unset; /* Remove max-width to allow flex-basis to work */
+            }
+            .upi-app-buttons {
+                 gap: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -150,25 +234,35 @@
             Amount to Pay: <span id="amount-value"></span>
         </div>
 
-        <a class="payment-button" href="upi://pay?pa=ashishv@upi&cu=INR">
-            Make UPI Payment
-        </a>
+        <button class="payment-button">
+            Make Payment
+        </button>
+
+        <div class="upi-app-buttons">
+            <a href="#" class="upi-app-button gpay">
+                <div class="logo"></div>
+                Pay using GPay
+            </a>
+            <a href="#" class="upi-app-button paytm">
+                <div class="logo"></div>
+                Pay using Paytm
+            </a>
+            <a href="#" class="upi-app-button phonepe">
+                <div class="logo"></div>
+                Pay using PhonePe
+            </a>
+        </div>
 
         <div class="details-section">
-            <h3>Other Payment Options</h3>
+            <h2>Other Payment Options</h2>
 
-            <h2>UPI Details</h2>
+            <h3>UPI Details</h3>
             <div class="detail-item">
                 <span>UPI ID:</span>
-                <strong>ashishv@upi</strong>
-            </div>
-          
-          <h2>UPI QR</h2>
-            <div class="detail-item">
-                <img style="width: 100%; height: auto;" src="https://pay.ashishvishwakarma.com/UPI%20QR.jpg" />
+                <strong>ashish.vishwa@bankname</strong>
             </div>
             
-            <h2>Bank Account Details</h2>
+            <h2 class="bank-details-header">Bank Account Details</h2>
             <div class="detail-item">
                 <span>Account Holder Name:</span>
                 <strong>Ashish Vishwakarma</strong>
@@ -184,7 +278,7 @@
         </div>
 
         <div class="footer">
-            &copy; 2025 Ashish Vishwakarma. All Rights Reserved.
+            &copy; 2026 Ashish Vishwakarma. All Rights Reserved.
         </div>
     </div>
 
@@ -198,7 +292,8 @@
                 const amountValue = document.getElementById('amount-value');
                 
                 // Simple formatting (e.g., adding INR symbol, though a full formatter is better for production)
-                amountValue.textContent = `₹ {amount}`; 
+                // For a more robust solution, consider Intl.NumberFormat
+                amountValue.textContent = `₹${amount}`; 
                 amountDisplay.style.display = 'block'; // Show the element
             }
         });
